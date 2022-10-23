@@ -13,8 +13,8 @@ import logo from "../public/logo1.png";
 import SidebarRow from "./SidebarRow";
 const Sidebar = () => {
   return (
-    <div className="flex flex-col">
-      <img className="h-10 w-10" src={logo.src} alt="" />
+    <div className="flex flex-col col-span-3 items-center px-4 md:items-start">
+      <img className="m-3 h-10 w-10" src={logo.src} alt="" />
       <SidebarRow Icon={UserIcon} title="Sign In" />
       <SidebarRow Icon={HomeIcon} title="Home" />
       <SidebarRow Icon={HashtagIcon} title="Explore" />

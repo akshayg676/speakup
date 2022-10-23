@@ -4,12 +4,13 @@ import { Feed, Sidebar } from "../components";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-slate-800 text-white min-h-screen">
-      {/* Sidebar */}
-      <Sidebar />
-      {/* Feed */}
-      <Feed />
-      {/* Widgets */}
+    <div className="mx-auto max-h-screen overflow-hidden md:max-w-5xl ">
+      <main className="grid grid-cols-9">
+        {/* Sidebar */}
+        <Sidebar />
+        {/* Feed */}
+        <Feed />
+      </main>
     </div>
   );
 };
