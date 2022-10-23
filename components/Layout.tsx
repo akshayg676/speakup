@@ -9,7 +9,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div>
       <Head>
-        <title>Speak Up</title>
+        <title>Binary Bee</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}
