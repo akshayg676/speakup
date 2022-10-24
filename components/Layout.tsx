@@ -7,7 +7,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className="bg-slate-800 text-white min-h-screen">
+    <div className="bg-slate-800 text-white">
       <Head>
         <title>Binary Bee</title>
         <link rel="icon" href="/favicon.ico" />
