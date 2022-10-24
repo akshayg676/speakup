@@ -9,7 +9,7 @@ import {
   UserIcon,
   HomeIcon,
 } from "@heroicons/react/outline";
-import logo from "../public/logo1.png";
+import logo from "../public/logo.png";
 import SidebarRow from "./SidebarRow";
 const Sidebar = () => {
   return (

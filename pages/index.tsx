@@ -6,6 +6,7 @@ import { fetchPosts } from "../utils/fetchPosts";
 interface Props {
   posts: Post[];
 }
+
 const Home = ({ posts }: Props) => {
   return (
     <div className="mx-auto max-h-screen overflow-hidden md:max-w-4xl ">
@@ -13,7 +14,7 @@ const Home = ({ posts }: Props) => {
         {/* Sidebar */}
         <Sidebar />
         {/* Feed */}
-        <Feed />
+        <Feed posts={posts} />
       </main>
     </div>
   );
