@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -7,8 +7,15 @@ import {
   SearchCircleIcon,
 } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
+import { Post, PostBody } from "../typings";
+import { fetchPosts } from "../utils/fetchPosts";
+import toast from "react-hot-toast";
 
-const PostBox = () => {
+interface Props {
+  setPosts: Dispatch<SetStateAction<Post[]>>;
+}
+
+const PostBox = ({ setPosts }: Props) => {
   const { data: session } = useSession();
   const [input, setInput] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -25,6 +32,42 @@ const PostBox = () => {
 
     setImage(imageInputRef.current.value);
     imageInputRef.current.value = "";
+    setImageUrlBoxIsOpen(false);
+  };
+
+  const publishPost = async () => {
+    const postBody: PostBody = {
+      text: input,
+      username: session?.user?.name || "Unknown User",
+      image: image,
+      profileImage: session?.user?.image || "https://links.papareact.com/gll",
+    };
+
+    const result = await fetch(`/api/addPost`, {
+      body: JSON.stringify(postBody),
+      method: "POST",
+    });
+
+    const json = await result.json();
+
+    const newPosts = await fetchPosts();
+    setPosts(newPosts);
+
+    toast("Post Published", {
+      icon: "🚀",
+    });
+    return json;
+  };
+
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    publishPost();
+
+    setImage("");
+    setInput("");
     setImageUrlBoxIsOpen(false);
   };
   return (
@@ -55,6 +98,7 @@ const PostBox = () => {
               <LocationMarkerIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
             </div>
             <button
+              onClick={handleSubmit}
               disabled={!input || !session}
               className="px-5 py-2 rounded-full bg-matteYellow font-bold disabled:opacity-50 tracking-wide"
             >

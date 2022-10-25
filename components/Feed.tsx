@@ -33,7 +33,7 @@ const Feed = ({ posts: postsProp }: Props) => {
         />
       </div>
       <div>
-        <PostBox />
+        <PostBox setPosts={setPosts} />
       </div>
       <div>
         {posts.map((post) => (
