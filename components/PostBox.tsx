@@ -6,13 +6,17 @@ import {
   PhotographIcon,
   SearchCircleIcon,
 } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
+
 const PostBox = () => {
   const [input, setInput] = useState<string>("");
+  const { data: session } = useSession();
+
   return (
     <div className="flex space-x-2 p-5">
       <img
         className="mt-4 h-14 w-14 rounded-full object-cover"
-        src="https://links.papareact.com/gll"
+        src={session?.user?.image || "https://links.papareact.com/gll"}
         alt=""
       />
       <div className="flex flex-1 items-center pl-2">
@@ -33,7 +37,7 @@ const PostBox = () => {
               <LocationMarkerIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
             </div>
             <button
-              disabled={!input}
+              disabled={!input || !session}
               className="px-5 py-2 rounded-full bg-matteYellow font-bold disabled:opacity-50 tracking-wide"
             >
               Post
