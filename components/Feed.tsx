@@ -24,7 +24,7 @@ const Feed = ({ posts: postsProp }: Props) => {
   };
 
   return (
-    <div className="col-span-6 border-x border-slate-600">
+    <div className="col-span-6 border-x max-h-screen overflow-scroll scrollbar-hide border-slate-600">
       <div className="flex items-center justify-between">
         <h1 className="p-5 pb-0 text-xl font-bold">Home</h1>
         <RefreshIcon
