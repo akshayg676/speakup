@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -9,9 +9,24 @@ import {
 import { useSession } from "next-auth/react";
 
 const PostBox = () => {
-  const [input, setInput] = useState<string>("");
   const { data: session } = useSession();
+  const [input, setInput] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState<boolean>(false);
 
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const addImageToPost = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (!imageInputRef.current?.value) return;
+
+    setImage(imageInputRef.current.value);
+    imageInputRef.current.value = "";
+    setImageUrlBoxIsOpen(false);
+  };
   return (
     <div className="flex space-x-2 p-5">
       <img
@@ -30,7 +45,10 @@ const PostBox = () => {
           />
           <div className="flex items-center">
             <div className="flex flex-1 space-x-2 text-matteYellow">
-              <PhotographIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
+              <PhotographIcon
+                onClick={() => setImageUrlBoxIsOpen((prev) => !prev)}
+                className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150"
+              />
               <SearchCircleIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
               <EmojiHappyIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
               <CalendarIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
@@ -43,6 +61,31 @@ const PostBox = () => {
               Post
             </button>
           </div>
+          {imageUrlBoxIsOpen && (
+            <form className="mt-5 flex rounded-lg bg-matteYellow/80 py-2 px-4">
+              <input
+                ref={imageInputRef}
+                className="flex-1 bg-transparent p-2 outline-none placeholder:text-white"
+                type="text"
+                placeholder="Enter Image URL..."
+              />
+              <button
+                type="submit"
+                onClick={addImageToPost}
+                className="font-bold "
+              >
+                Add Image
+              </button>
+            </form>
+          )}
+
+          {image && (
+            <img
+              className="mt-10 h-40 w-full rounded-xl object-contain shadow-2xl"
+              src={image}
+              alt=""
+            />
+          )}
         </form>
       </div>
     </div>
