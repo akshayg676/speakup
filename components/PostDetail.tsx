@@ -151,9 +151,11 @@ const PostDetail = ({ post }: Props) => {
               </div>
             ))}
           </div>
-          <p className=" flex justify-center text-gray-500 text-xs sm:text-base">
-            Scroll ⬇ for more comments
-          </p>
+          {comments.length > 1 && (
+            <p className=" flex justify-center text-gray-500 text-xs sm:text-base">
+              Scroll ⬇ for more comments
+            </p>
+          )}
         </div>
       )}
     </div>
