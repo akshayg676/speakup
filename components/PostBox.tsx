@@ -36,6 +36,7 @@ const PostBox = ({ setPosts }: Props) => {
   };
 
   const publishPost = async () => {
+    const commentToast = toast.loading("Uploading Post...");
     const postBody: PostBody = {
       text: input,
       username: session?.user?.name || "Unknown User",
@@ -53,8 +54,9 @@ const PostBox = ({ setPosts }: Props) => {
     const newPosts = await fetchPosts();
     setPosts(newPosts);
 
-    toast("Post Published", {
+    toast.success("Post Published", {
       icon: "🚀",
+      id: commentToast,
     });
     return json;
   };
