@@ -17,7 +17,7 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col col-span-2 items-center px-4 sm:items-start">
+    <div className="flex flex-col col-span-2  items-center px-4 md:items-start">
       <img className="m-3 h-10 w-10" src={logo.src} alt="" />
       <SidebarRow
         onClick={session ? signOut : signIn}

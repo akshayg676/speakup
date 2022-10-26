@@ -65,7 +65,7 @@ const PostDetail = ({ post }: Props) => {
         />
         <div>
           <div className="flex items-center space-x-1">
-            <p className="mr-1 font-bold">{post.username}</p>
+            <p className="mr-1 font-semibold sm:font-bold">{post.username}</p>
             <p className="hidden text-sm text-gray-500 sm:inline">
               @{post.username.replace(/\s+/g, "").toLowerCase()} ·
             </p>
@@ -151,7 +151,7 @@ const PostDetail = ({ post }: Props) => {
               </div>
             ))}
           </div>
-          <p className=" flex justify-center text-gray-500">
+          <p className=" flex justify-center text-gray-500 text-xs sm:text-base">
             Scroll ⬇ for more comments
           </p>
         </div>

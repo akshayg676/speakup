@@ -73,7 +73,7 @@ const PostBox = ({ setPosts }: Props) => {
     setImageUrlBoxIsOpen(false);
   };
   return (
-    <div className="flex space-x-2 p-5">
+    <div className="flex flex-col space-x-2 p-5 sm:flex-row">
       <img
         className="mt-4 h-14 w-14 rounded-full object-cover"
         src={session?.user?.image || "https://links.papareact.com/gll"}
@@ -84,11 +84,11 @@ const PostBox = ({ setPosts }: Props) => {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="bg-inherit h-24 w-full text-xl outline-none placeholder:text-xl"
+            className="bg-inherit h-24 w-full text-xl outline-none placeholder:text-lg sm:placeholder:text-xl"
             type="text"
             placeholder="What's Happening?"
           />
-          <div className="flex items-center">
+          <div className="flex items-center space-x-2">
             <div className="flex flex-1 space-x-2 text-matteYellow">
               <PhotographIcon
                 onClick={() => setImageUrlBoxIsOpen((prev) => !prev)}
@@ -102,13 +102,13 @@ const PostBox = ({ setPosts }: Props) => {
             <button
               onClick={handleSubmit}
               disabled={!input || !session}
-              className="px-5 py-2 rounded-full bg-matteYellow font-bold disabled:opacity-50 tracking-wide"
+              className="px-3 py-2 rounded-full bg-matteYellow font-semibold disabled:opacity-50 tracking-wide sm:px-5 sm:py-2 sm:font-bold"
             >
               Post
             </button>
           </div>
           {imageUrlBoxIsOpen && (
-            <form className="mt-5 flex rounded-lg bg-matteYellow/80 py-2 px-4">
+            <form className="mt-5 flex flex-col rounded-lg bg-matteYellow/80 py-2 px-4 md:flex-row">
               <input
                 ref={imageInputRef}
                 className="flex-1 bg-transparent p-2 outline-none placeholder:text-white"
